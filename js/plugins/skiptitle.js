@@ -13,7 +13,6 @@
  *
  * @help This plugin does not provide plugin commands. RPG Maker MZ is not supported.
  */
-
 void function() {
 
     var parameters = PluginManager.parameters('SkipTitle');
@@ -25,8 +24,16 @@ void function() {
             Scene_Base.prototype.start.call(this);
             SoundManager.preloadImportantSounds();
             this.checkPlayerLocation();
-            DataManager.setupNewGame();
-            SceneManager.goto(Scene_Map);
+            
+            // 載入存檔1
+            var savefileId = 1;
+            if (DataManager.loadGame(savefileId)) {
+                this.fadeOutAll();
+                SceneManager.goto(Scene_Map);
+            } else {
+                DataManager.setupNewGame();
+                SceneManager.goto(Scene_Map);
+            }
         };
     }
 
