@@ -1,5 +1,3 @@
-// 跳過遊戲開頭直接進入存檔2的腳本
-
 // 在遊戲加載完成後立即運行的代碼
 Scene_Boot.prototype.start = function() {
     Scene_Base.prototype.start.call(this);
@@ -12,8 +10,7 @@ Scene_Boot.prototype.start = function() {
         SceneManager.goto(Scene_Map);
     } else {
         this.checkPlayerLocation();
-        DataManager.setupNewGame();
-        // 設置存檔1的遊戲狀態
+        // 設置存檔2的遊戲狀態
         DataManager.loadGame(2);
         // 跳轉到地圖畫面
         SceneManager.goto(Scene_Map);
