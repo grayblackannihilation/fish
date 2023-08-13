@@ -1,40 +1,22 @@
-//=============================================================================
-// 跳過標題.js
-//=============================================================================
+// 跳過遊戲開頭直接進入存檔1的腳本
 
-/*:
- * @plugindesc Skip Title.
- * @author taroxd
- *
- * @param Test Only
- * @desc Whether to skip title only in playtest. true/false
- * @type boolean
- * @default true
- *
- * @help This plugin does not provide plugin commands. RPG Maker MZ is not supported.
- */
-void function() {
-
-    var parameters = PluginManager.parameters('SkipTitle');
-    var testOnly = parameters['Test Only'] !== 'false';
-    var enable = !testOnly || Utils.isOptionValid("test");
-
-    if (enable) {
-        Scene_Boot.prototype.start = function() {
-            Scene_Base.prototype.start.call(this);
-            SoundManager.preloadImportantSounds();
-            this.checkPlayerLocation();
-            
-            // 載入存檔1
-            var savefileId = 1;
-            if (DataManager.loadGame(savefileId)) {
-                this.fadeOutAll();
-                SceneManager.goto(Scene_Map);
-            } else {
-                DataManager.setupNewGame();
-                SceneManager.goto(Scene_Map);
-            }
-        };
+// 在遊戲加載完成後立即運行的代碼
+Scene_Boot.prototype.start = function() {
+    Scene_Base.prototype.start.call(this);
+    SoundManager.preloadImportantSounds();
+    if (DataManager.isBattleTest()) {
+        DataManager.setupBattleTest();
+        SceneManager.goto(Scene_Battle);
+    } else if (DataManager.isEventTest()) {
+        DataManager.setupEventTest();
+        SceneManager.goto(Scene_Map);
+    } else {
+        this.checkPlayerLocation();
+        DataManager.setupNewGame();
+        // 設置存檔1的遊戲狀態
+        DataManager.loadGame(1);
+        // 跳轉到地圖畫面
+        SceneManager.goto(Scene_Map);
     }
-
-}();
+    this.updateDocumentTitle();
+};
