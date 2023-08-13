@@ -3,7 +3,6 @@
 var $plugins =
 [
 {"name":"windows","status":true,"description":"","parameters":{}},
-{"name":"TitleNewGameOnly","status":true,"description":"[ ver.2.1.0 ]讓標題畫面直接開始遊戲","parameters":{"startString":"","font":"{\"name\":\"\",\"size\":\"40\",\"bold\":\"false\",\"italic\":\"false\",\"color\":\"rgba(255,255,255,1.0)\"}","fileExistAction":"2","soundEffect":"{\"name\":\"\",\"volume\":\"90\",\"pitch\":\"100\",\"pan\":\"0\"}","adjustY":"50"}},
 {"name":"PictureCallCommon","status":true,"description":"[ ver1.13.1 ]圖片按鈕化","parameters":{"透明色を考慮":"true","ピクチャ番号の変数番号":"0","ポインタX座標の変数番号":"0","ポインタY座標の変数番号":"0","タッチ操作抑制":"false","戦闘中常にコモン実行":"false","並列処理として実行":"false","無効スイッチ":"0"}},
 {"name":"DTextPicture","status":true,"description":"動的文字列ピクチャ生成プラグイン","parameters":{}},
 {"name":"skiptitle","status":true,"description":"Skip Title.","parameters":{"Test Only":"false"}},
